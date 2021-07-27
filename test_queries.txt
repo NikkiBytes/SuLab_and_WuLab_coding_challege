@@ -1,0 +1,164 @@
+
+HEAD harvardmetadata
+
+
+
+GET /harvardmetadata/_search?q="https://doi.org/10.11588/data/0HJAJS"
+
+GET /harvardmetadata/_search?q="https://doi.org/10.11588/data/0HJW2A"
+
+GET /harvardmetadata/_search
+{
+  "query": {
+    "match_all" : {}
+  }
+}
+POST /harvardmetadata/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "0HJW2A",
+      "fields" : ["@id"]
+    }
+  }
+}
+
+
+POST harvard_data/_search
+{
+    "query": {
+      "term": {
+        "identifier": "0HJAJS"}}
+}
+
+
+POST harvarddata/_search
+{
+    "query": {
+      "match": {
+        "identifier": "0HJAJS"}}
+}
+
+
+GET harvardmetadata/_mapping
+
+GET harvarddata/_all/_mapping
+
+
+POST test/_create/1
+{
+        "@context": "http://schema.org",
+        "@type": "Dataset",
+        "@id": "https://doi.org/10.11588/data/0HJAJS",
+        "identifier": "https://doi.org/10.11588/data/0HJAJS",
+        "name": "Erz\u00e4hlte Inschriften in der Literatur des Mittelalters (Projektdatenbank)",
+        "creator": [
+            {
+                "name": "Ott, Michael R.",
+                "affiliation": "Sonderforschungsbereich Materiale Textkulturen (933), Teilprojekt C05. Universit\u00e4t Heidelberg."
+            }
+        ],
+        "author": [
+            {
+                "name": "Ott, Michael R.",
+                "affiliation": "Sonderforschungsbereich Materiale Textkulturen (933), Teilprojekt C05. Universit\u00e4t Heidelberg."
+            }
+        ],
+        "datePublished": "2019-02-05",
+        "dateModified": "2019-06-28",
+        "version": "2",
+        "description": [
+            "Diese Datenpublikation entstammt dem Teilprojekt C05 (\u00bbInschriftlichkeit. Reflexionen materialer Textkultur in der Literatur des 12. bis 17. Jahrhunderts\u00ab) des Sonderforschungsbereichs 933 (\u00bbMateriale Textkulturen\u00ab). Im Rahmen des Teilprojekts werden erz\u00e4hlte Inschriften in der mittelalterlichen Literatur gesammelt und auf einer Website \u00f6ffentlich zug\u00e4nglich gemacht. Diese Datenpublikation enth\u00e4lt den Datensatz, auf dem diese Website beruht. Das Projekt ist noch nicht abgeschlossen. Als Inschrift z\u00e4hlt Geschriebenes, das a) nicht zu den g\u00e4ngigen Formen von Schriftlichkeit geh\u00f6rt (also nicht mit \u00fcblichen Hilfsmitteln auf Pergament und Papier geschrieben ist) und/oder Geschriebenes, b) bei dem von einer intensiven Verbindung von Inhalt und Schrifttr\u00e4ger auszugehen ist. Der Ausgangspunkt der Sammlung sind deutschsprachige erz\u00e4hlte Inschriften vor 1700. Seit der zweiten Projektphase werden zudem verst\u00e4rkt erz\u00e4hlte Inschriften im Altnordischen, Alt- und Mittelenglischen sowie im Mittellateinischen gesammelt. F\u00fcr eine dritte Projektphase ist eine ausf\u00fchrlichere Sammlung von mittellateinischen und altfranz\u00f6sischen Textstellen geplant. Belege aus der altfranz\u00f6sischen und mittellateinischen Literatur sind in der Datenpublikation bisher nur exemplarisch verzeichnet. Demgegen\u00fcber d\u00fcrften die Belege f\u00fcr die englische und skandinavische Literatur des Mittelalters recht vollst\u00e4ndig sein. Ebenfalls recht vollst\u00e4ndig abgedeckt ist die deutschsprachige h\u00f6fische Literatur des 12.-14. Jahrhunderts. Der Bereich der geistlichen und historiographischen deutschsprachigen Literatur wurde nicht systematisch durchgesehen. Gesammelt wurden die Daten vom Projektleiter (Ludger Lieb), von den ProjektmitarbeiterInnen (Frank Krabbes, Astrid Lembke, Michael R. Ott, Laura Velte), den studentischen Hilfskr\u00e4ften des Teilprojekts sowie von zwei Gastwissenschaftlerinnen: Katja Schulz (Altnordisch) und Christine Neufeld (Alt- und Mittelenglisch)."
+        ],
+        "keywords": [
+            "Arts and Humanities",
+            "Literatur",
+            "Mittelalter",
+            "Inschrift",
+            "Materialit\u00e4t",
+            "Althochdeutsch",
+            "Mittelhochdeutsch",
+            "Altnordisch",
+            "Altenglisch",
+            "Mittelenglisch",
+            "Altfranz\u00f6sisch",
+            "Mittellatein"
+        ],
+        "citation": [
+            {
+                "@type": "CreativeWork",
+                "text": "Ludger Lieb: Spuren materialer Textkulturen. Neun Thesen zur h\u00f6fischen Textualit\u00e4t im Spiegel text\u00adimmanenter Inschriften. In: Beate Kellner, Ludger Lieb und Stephan M\u00fcller (Hrsg.): H\u00f6fische Textualit\u00e4t. Festschrift f\u00fcr Peter Strohschneider. (GRM-Beiheft 69) Heidelberg 2015, S. 1-20."
+            }
+        ],
+        "license": {
+            "@type": "Dataset",
+            "text": "Licensed under a <a href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License. &#160;<img src='https://i.creativecommons.org/l/by/4.0/80x15.png' alt='CC by' /></a>"
+        },
+        "includedInDataCatalog": {
+            "@type": "DataCatalog",
+            "name": "heiDATA",
+            "url": "https://heidata.uni-heidelberg.de"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "heiDATA"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "heiDATA"
+        },
+        "funder": [
+            {
+                "@type": "Organization",
+                "name": "Deutsche Forschungsgemeinschaft"
+            }
+        ],
+        "distribution": [
+            {
+                "@type": "DataDownload",
+                "name": "sfb933_c05_erzaehlte_inschriften_20190626.csv",
+                "fileFormat": "text/csv",
+                "contentSize": 1613163,
+                "@id": "https://doi.org/10.11588/data/0HJAJS/IELTOH",
+                "identifier": "https://doi.org/10.11588/data/0HJAJS/IELTOH"
+            },
+            {
+                "@type": "DataDownload",
+                "name": "sfb933_c05_erzaehlte_inschriften_beschreibung.tab",
+                "fileFormat": "text/tab-separated-values",
+                "contentSize": 2724,
+                "@id": "https://doi.org/10.11588/data/0HJAJS/K6EFZY",
+                "identifier": "https://doi.org/10.11588/data/0HJAJS/K6EFZY"
+            }
+        ]
+    }
+    
+  PUT test 
+ { "mappings" : {
+      "properties" : {
+        "@id" : {
+          "type" : "text"
+          , "analyzer": "standard"
+        },
+        "@timestamp" : {
+          "type" : "date"
+        },
+        "description" : {
+          "type" : "text"
+        },
+        "field" : {
+          "type" : "keyword"
+        },
+        "identifier" : {
+          "type" : "text"
+        },
+        "message" : {
+          "type" : "text"
+        }
+      }
+    }
+ }
+ 
+ GET test 
+ GET _search?q=Literatur
+ DELETE test

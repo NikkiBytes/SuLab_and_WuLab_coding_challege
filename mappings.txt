@@ -27,3 +27,34 @@
     }
   }
 }
+
+
+{
+  "properties": {
+    "@id": {
+      "type": "keyword",
+      "analyzer": "standard"
+    },
+    "identifier": {
+      "type": "text".
+      "analyzer": "standard"
+    },
+    "name": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text",
+       "analyzer": "standard"
+    },
+    "keywords": {
+      "type": "text",
+       "analyzer": "standard"
+    },
+    "@timestamp": {
+      "type": "date"
+    }
+  }
+}
+
+
+ 

@@ -1,0 +1,29 @@
+{
+  "harvardmetadata" : {
+    "mappings" : {
+      "_meta" : {
+        "created_by" : "file-data-visualizer"
+      },
+      "properties" : {
+        "@id" : {
+          "type" : "text"
+        },
+        "@timestamp" : {
+          "type" : "date"
+        },
+        "description" : {
+          "type" : "text"
+        },
+        "field" : {
+          "type" : "keyword"
+        },
+        "identifier" : {
+          "type" : "text"
+        },
+        "message" : {
+          "type" : "text"
+        }
+      }
+    }
+  }
+}

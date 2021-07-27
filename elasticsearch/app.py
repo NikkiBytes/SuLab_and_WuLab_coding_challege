@@ -8,14 +8,17 @@ es = Elasticsearch()
 @app.route('/', methods=["GET", "POST"])
 def index():
     
-    q = request.form.get("q")
+    q=request.args.get("q")
+    #q = request.form.get("q")
     if q is not None:
         
-        resp = es.search(index="harvardmetadata", body={"query": {"match": { "text":  q}}})
-        return render_template("index.html", q=q, response=resp )
-    
-    return render_template("index.html")
+        res=es.search(index="harvardmetadata", body={"query": {"match_all":{}}})
+        return render_template("index.html", q=q, response=res )
+
+    return render_template("index.html", q=q)
+
+
 
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

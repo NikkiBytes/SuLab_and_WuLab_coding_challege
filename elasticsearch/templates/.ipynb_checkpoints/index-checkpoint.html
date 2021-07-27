@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <title> Query App</title>
+
+    </head>
+    <body>
+        <h1> Elasticsearch Query API Challenge</h1>
+        <hr>
+        <form action="/" methods="get" autocomplete="off">
+            <label for="q">search here: </label><input type="text" name="q" id="q" values="">
+            <input type="submit" value="search">
+        </form>
+       
+        {% block content %}{% endblock %}
+        
+    </body>
+</html>

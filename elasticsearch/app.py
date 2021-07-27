@@ -11,8 +11,8 @@ def index():
     q = request.form.get("q")
     if q is not None:
         
-        resp = _es.search(index=)
-        return render_template("index.html")
+        resp = es.search(index="harvardmetadata", body={"query": {"match": { "text":  q}}})
+        return render_template("index.html", q=q, response=resp )
     
     return render_template("index.html")
 

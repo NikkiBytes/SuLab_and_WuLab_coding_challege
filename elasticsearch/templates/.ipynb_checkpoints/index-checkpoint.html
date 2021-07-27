@@ -8,13 +8,14 @@
 <body>
 <h1> Elasticsearch Query API Challenge</h1> 
 <hr> 
-<form action="/" methods="post" autocomplete="off">
+<form action="/" methods="post" autocplete="off">
         <label for="q">search here: </label><input type="text" name="q" id="q" values="{{q}}">
         <input type="submit" value="search">
-
-        
-     {{response}}
-        
-    </form>
+<br><br>
+     {% for x in response %}
+        {{x._source.message}}
+    {% endfor %}
+    
+</form>
 </body>
 </html>

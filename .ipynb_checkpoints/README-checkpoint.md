@@ -10,4 +10,9 @@ There is also a bonus point if you can achieve:
 
 create a customized mapping file to index metadata objects so that
 index "funder.name" field as keyword (if possible, case-insensitive keyword) and allow passing a "facet=funder.name" parameter to the query endpoint to return the facet results on "funder.name".
-The rest of fields should still be indexed and searchable as the default behavio
+The rest of fields should still be indexed and searchable as the default behavior
+
+
+
+Assumptions:
+- only 1 search bar needed (it is not a nested search)

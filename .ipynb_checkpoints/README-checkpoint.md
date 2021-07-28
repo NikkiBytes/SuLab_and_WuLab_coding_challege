@@ -15,5 +15,4 @@ The rest of fields should still be indexed and searchable as the default behavio
 
 
 Assumptions:
-- only 1 search bar needed (it is not a nested search), or put otherwise user is search by 1) a specific id, OR 2) any field with a keyword 
-- for the second query option, I am assuming users will input a keyword(s) and then the query will survey all fields for a match, as opposed to allowing the user to select a field and then provide the keyword.
+

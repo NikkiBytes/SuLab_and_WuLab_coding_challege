@@ -9,29 +9,55 @@ es = Elasticsearch()
 @app.route('/', methods=["GET", "POST"])
 def index():
     
-    q=request.args.get("q")
-    
+    # field list for selection menu
     fields=['@context', '@id', '@type', 'author', 'citation', 'creator', 'dateModified', 'datePublished', 'description', 'distribution', 'funder', 'identifier', 'includedInDataCatalog', 'keywords', 'license', 'name', 'provider', 'publisher', 'spatialCoverage', 'temporalCoverage', 'version']
     
+    # input values
+    queryID=request.args.get("queryID")
+    queryField=request.args.get("queryField")
+    queryKeyword=request.args.get("queryKeyword")
     #q = request.form.get("q")
-    if q is not None:
-        
-        query={
+    
+    if queryID is not None:
+   
+        # Elasticsearch query for an id
+        query_id={
             "query": {
                 "ids" : {
                     "type" : "metadata",
-                    "values" : [q]
+                    "values" : [queryID]
                         }
                      }
             }
 
+        res=es.search(index="harvardmetadata", doc_type="metadata", body=query_id)
         
-        res=es.search(index="harvardmetadata", doc_type="metadata", body=query)
+        return render_template("index.html", fields=fields, response=res)
+    
+    if queryKeyword is not None:
         
-
-        return render_template("index.html", q=q, response=res)
-
-    return render_template("index.html", fields=fields)
+        # Elasticsearch Query for a specific field 
+        query_field={
+          "query": {
+              "match_phrase": {
+                queryField: {
+                  "query": queryKeyword
+                }
+            }
+          }
+        }
+        
+        # search ES index
+        res=es.search(index="harvardmetadata", doc_type="metadata", body=query_field)
+        # pull the number of hits found
+        hits=res['hits']['total']['value']
+        # format object data
+        if hits == 1:
+            hit_obj = res['hits']['hits'][0]
+            data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
+        return render_template("index.html", fields=fields, response=data_json)
+    
+    return render_template("index.html", x=queryID, y=queryField, z=queryKeyword, fields=fields)
 
 
 
@@ -39,13 +65,4 @@ def index():
 if __name__=="__main__":
     app.run(debug=True, port=8000)
     
-#def format_data(data, data_list):
 
-#dict_hits=(res["hits"]["hits"])
-#data_list=[]
-#for x in dict_hits:
- #   data=x["_source"]["message"]
-    #format_data(data, data_list)
-  #  data_list.append(data)
-#json_str=json.dumps(dict_hits, separators=(',', ':'), indent=4)
-#json_str=json_str.replace("\n", "")

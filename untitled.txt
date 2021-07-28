@@ -1,0 +1,25 @@
+ <!--   {% for x in response %}
+        {{x._source.message}}
+    {% endfor %} -->
+    
+    
+   <form method="post" action="/">
+        <label for="fieldsearch">field query: </label>
+        <select id="queryField" name="queryField">
+            {% for field in fields %}
+            <option value="{{field}}">{{field}}</option>
+            {% endfor %}
+        </select>
+    </form>
+    
+
+        
+            #queryField=request.args.get("queryField")
+    #queryKeyword=request.args.get("queryKeyword")
+    
+    
+    <form action="/" method="post" >    
+        <label for="queryKeyword">keywords: </label>
+        <input type="text" name="queryKeyword" id="queryKeyword" values="{{queryKeyword}}">
+        <input type="submit" value="search">
+    </form>

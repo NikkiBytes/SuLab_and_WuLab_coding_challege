@@ -12,10 +12,9 @@
         <label for="q">search here: </label><input type="text" name="q" id="q" values="{{q}}">
         <input type="submit" value="search">
 <br><br>
-     {% for x in response %}
-        {{x._source.message}}
-    {% endfor %}
+   {{response}}
     
 </form>
 </body>
 </html>
+

@@ -13,29 +13,20 @@ def index():
     #q = request.form.get("q")
     if q is not None:
         
-        query1={
-                "query": {
-                    "match":{
-                      "message": {
-                        "query": q
-                      }
-                    }
-                }
+        query={
+            "query": {
+                "ids" : {
+                    "type" : "metadata",
+                    "values" : [q]
+                        }
+                     }
             }
+
         
-        res=es.search(index="harvard_data", body=query1)
+        res=es.search(index="harvardmetadata", doc_type="metadata", body=query)
         
-        #def format_data(data, data_list):
-            
-        dict_hits=(res["hits"]["hits"])
-        data_list=[]
-        for x in dict_hits:
-            data=x["_source"]["message"]
-            #format_data(data, data_list)
-            data_list.append(data)
-        #json_str=json.dumps(dict_hits, separators=(',', ':'), indent=4)
-        #json_str=json_str.replace("\n", "")
-        return render_template("index.html", q=q, response=dict_hits)
+
+        return render_template("index.html", q=q, response=res)
 
     return render_template("index.html")
 
@@ -44,3 +35,14 @@ def index():
 
 if __name__=="__main__":
     app.run(debug=True, port=8000)
+    
+#def format_data(data, data_list):
+
+#dict_hits=(res["hits"]["hits"])
+#data_list=[]
+#for x in dict_hits:
+ #   data=x["_source"]["message"]
+    #format_data(data, data_list)
+  #  data_list.append(data)
+#json_str=json.dumps(dict_hits, separators=(',', ':'), indent=4)
+#json_str=json_str.replace("\n", "")

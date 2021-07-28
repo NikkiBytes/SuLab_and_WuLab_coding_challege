@@ -10,6 +10,9 @@ es = Elasticsearch()
 def index():
     
     q=request.args.get("q")
+    
+    fields=['@context', '@id', '@type', 'author', 'citation', 'creator', 'dateModified', 'datePublished', 'description', 'distribution', 'funder', 'identifier', 'includedInDataCatalog', 'keywords', 'license', 'name', 'provider', 'publisher', 'spatialCoverage', 'temporalCoverage', 'version']
+    
     #q = request.form.get("q")
     if q is not None:
         
@@ -28,7 +31,7 @@ def index():
 
         return render_template("index.html", q=q, response=res)
 
-    return render_template("index.html")
+    return render_template("index.html", fields=fields)
 
 
 

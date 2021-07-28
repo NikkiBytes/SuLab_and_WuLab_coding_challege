@@ -8,13 +8,29 @@
 <body>
 <h1> Elasticsearch Query API Challenge</h1> 
 <hr> 
-<form action="/" methods="post" autocplete="off">
-        <label for="q">search here: </label><input type="text" name="q" id="q" values="{{q}}">
+    <form action="/" methods="post" autocplete="off">
+        <label for="q">query id: </label><input type="text" name="q" id="q" values="{{q}}">
         <input type="submit" value="search">
-<br><br>
-   {{response}}
+    </form>
+    <br><br>
     
-</form>
+    <label for="fieldsearch">field query: </label>
+    <select name= fields method="get" action="/">
+        {% for field in fields %}
+        <option value="{{field}}">{{field}}</option>
+        {% endfor %}
+    </select>
+    
+    <form action="/" methods="post" autocplete="off">
+        <label for="keyword">keywords: </label><input type="text" name="keyword" id="keyword" values="{{keyword}}">
+        <input type="submit" value="search">
+    </form>
+    <br><br> 
+    
+    
+    {{response}}
+    
+
 </body>
 </html>
 

@@ -10,7 +10,7 @@ es = Elasticsearch()
 def index():
     
     # field list for selection menu
-    fields=['@context', '@id', '@type', 'author', 'citation', 'creator', 'dateModified', 'datePublished', 'description', 'distribution', 'funder', 'identifier', 'includedInDataCatalog', 'keywords', 'license', 'name', 'provider', 'publisher', 'spatialCoverage', 'temporalCoverage', 'version']
+    fields=['@context', '@id', '@type', 'author', 'citation', 'creator', 'dateModified', 'datePublished', 'description', 'distribution', 'funder', 'identifier', 'includedInDataCatalog', 'keywords', 'license', 'name', 'provider', 'publisher', 'spatialCoverage', 'temporalCoverage', 'version', 'author.@id', 'author.affiliation', 'author.identifier', 'author.name', 'citation.@id', 'citation.@type', 'citation.identifier', 'citation.text', 'creator.@id', 'creator.affiliation', 'creator.identifier', 'creator.name', 'distribution.@id', 'distribution.@type', 'distribution.contentSize', 'distribution.contentUrl', 'distribution.description', 'distribution.fileFormat', 'distribution.identifier', 'distribution.name', 'funder.@type', 'funder.name', 'includedInDataCatalog.@type', 'includedInDataCatalog.name', 'includedInDataCatalog.url', 'license.@type', 'license.text', 'license.url', 'provider.@type', 'provider.name', 'publisher.@type', 'publisher.name']
     
     # input values
     queryID=request.args.get("queryID")
@@ -29,11 +29,21 @@ def index():
                         }
                      }
             }
+        try:
+            # search ES index with ID query
+            res=es.search(index="harvardmetadata", doc_type="metadata", body=query_id)
+             # pull the number of hits found
+            hits=res['hits']['total']['value']
+            # format object data
+            if hits == 1:
+                template="single_hit.html"
+                hit_obj = res['hits']['hits'][0]["_source"]
+                data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
+            return render_template(template, fields=fields, response=data_json)
+        except:
+            return render_template("single_hit.html", fields=fields, response="ERROR")
 
-        res=es.search(index="harvardmetadata", doc_type="metadata", body=query_id)
-        
-        return render_template("index.html", fields=fields, response=res)
-    
+            
     if queryKeyword is not None:
         
         # Elasticsearch Query for a specific field 
@@ -47,15 +57,31 @@ def index():
           }
         }
         
-        # search ES index
-        res=es.search(index="harvardmetadata", doc_type="metadata", body=query_field)
-        # pull the number of hits found
-        hits=res['hits']['total']['value']
-        # format object data
-        if hits == 1:
-            hit_obj = res['hits']['hits'][0]
-            data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
-        return render_template("index.html", fields=fields, response=data_json)
+        try:
+            # search ES index with keyword field query
+            res=es.search(index="harvardmetadata", doc_type="metadata", body=query_field)
+            # pull the number of hits found
+            hits=res['hits']['total']['value']
+            # format object data
+            if hits == 1:
+                template="single_hit.html"
+                hit_obj = res['hits']['hits'][0]["_source"]
+                data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
+                return_data=data_json
+                                     
+            if hits > 1:
+                template="multi_hits.html"
+                hits_list=res["hits"]["hits"]
+                data_list=[]
+                for obj in hits_list:
+                    data_json=json.dumps(obj["_source"], separators=(',', ':'), indent=4)
+                    data_list.append(data_json)
+                return_data=data_list
+                                     
+            return render_template(template, fields=fields, response=return_data)
+        
+        except:
+            return render_template("index.html", fields=fields, response="ERROR")
     
     return render_template("index.html", x=queryID, y=queryField, z=queryKeyword, fields=fields)
 

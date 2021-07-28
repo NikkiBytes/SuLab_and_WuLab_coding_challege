@@ -14,5 +14,6 @@ The rest of fields should still be indexed and searchable as the default behavio
 
 
 
-Assumptions:
+Notes/Assumptions:
+* for the output I removed the elasticsearch tags, such as the "_shards", "hits", etc. fields.
 

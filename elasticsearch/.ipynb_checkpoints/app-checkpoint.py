@@ -42,6 +42,7 @@ def index():
                 data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
             
             return render_template(template, fields=fields, response=data_json, queryID=queryID)
+        
         except:
             return render_template("single_hit.html", fields=fields, response="ERROR")
 
@@ -80,7 +81,7 @@ def index():
                     data_list.append(data_json)
                 return_data=data_list
                                      
-            return render_template(template, fields=fields, response=return_data)
+            return render_template(template, fields=fields, response=return_data, queryField=queryField, queryKeyword=queryKeyword)
         
         except:
             return render_template("single_hit.html", fields=fields, response="ERROR")

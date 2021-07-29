@@ -8,7 +8,7 @@
 <body>
 <h1> Elasticsearch Query API Challenge</h1> 
 <hr> 
-    <br>
+    <br><br>
     <form action="/" methods="post" autocplete="off">
         <label for="queryID">query id: </label>
         <input type="text" name="queryID" id="queryID" values="{{queryID}}">
@@ -23,11 +23,16 @@
             <option value="{{field}}">{{field}}</option>
             {% endfor %}
         </select>
-        <label for="queryKeyword">keywords:</label>
+        <label for="queryKeyword">keywords: </label>
         <input type="text" name="queryKeyword" id="queryKeyword" values="{{queryKeyword}}">
         <input type="submit" value="search">
     </form>
     <br><br> 
+    <form methods="post" action="/">
+        <label for="queryBonus">funder.name: </label>
+        <input type="submit" name="queryBonus" id="queryBonus" value="view facet results">
+    </form>
+    <br><br>
     <hr>
     {% block content %}
     {% endblock %}

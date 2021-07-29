@@ -16,10 +16,9 @@ def index():
     queryID=request.args.get("queryID")
     queryField=request.args.get("queryField")
     queryKeyword=request.args.get("queryKeyword")
-    #q = request.form.get("q")
-    
+    queryBonus=request.args.get("queryBonus")
+
     if queryID is not None:
-   
         # Elasticsearch query for an id
         query_id={
             "query": {
@@ -29,22 +28,25 @@ def index():
                         }
                      }
             }
+        
         try:
             # search ES index with ID query
             res=es.search(index="harvardmetadata", doc_type="metadata", body=query_id)
              # pull the number of hits found
             hits=res['hits']['total']['value']
+            
             # format object data
             if hits == 1:
                 template="single_hit.html"
                 hit_obj = res['hits']['hits'][0]["_source"]
                 data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
+            
             return render_template(template, fields=fields, response=data_json)
         except:
             return render_template("single_hit.html", fields=fields, response="ERROR")
 
             
-    if queryKeyword is not None:
+    elif queryKeyword is not None:
         
         # Elasticsearch Query for a specific field 
         query_field={
@@ -69,7 +71,7 @@ def index():
                 data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
                 return_data=data_json
                                      
-            if hits > 1:
+            elif hits > 1:
                 template="multi_hits.html"
                 hits_list=res["hits"]["hits"]
                 data_list=[]
@@ -81,9 +83,31 @@ def index():
             return render_template(template, fields=fields, response=return_data)
         
         except:
-            return render_template("index.html", fields=fields, response="ERROR")
+            return render_template("single_hit.html", fields=fields, response="ERROR")
     
-    return render_template("index.html", x=queryID, y=queryField, z=queryKeyword, fields=fields)
+    elif queryBonus is not None:
+        facet_query={
+          "size":0,
+          "aggs": {
+            "facets": {
+              "terms": {
+                "field": "funder.name.keyword"
+                    }
+                }
+              }
+            }
+        res=es.search(index="harvardmetadata", doc_type="metadata", body=facet_query)
+        facet_buckets=res["aggregations"]["facets"]['buckets']
+        facet_dict={}
+        for bucket in facet_buckets:
+            key=bucket['key']
+            doc_ct=bucket['doc_count']
+            print(key,doc_ct)
+            facet_dict[key]=doc_ct
+        return render_template("facet.html", fields=fields, facet_dict=facet_dict)
+
+    
+    return render_template("index.html", fields=fields)
 
 
 

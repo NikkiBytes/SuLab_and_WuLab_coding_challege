@@ -1,7 +1,7 @@
 # Simple Elasticsearch API  
 
 ## Instructions  
-This assumes you have the Elasticsearch server installed and the Python Flask and Elasticsearch packages installed.
+This assumes you have Python 3, have the Elasticsearch server installed and the Python Flask and Elasticsearch packages installed. Installation instructions are listed below.
 
 ### Installation:  
 > Install [Elasticsearch server](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)     
@@ -29,18 +29,14 @@ On mac:
         `elasticsearch`  
 
 2. Load and index the data into Elasticsearch  
-Run the script `create_index.py` in the `load_and_index/` folder to automatically load and index the harvard metadata dateset into ES.   
+Run the script `create_index.py` in the `load_and_index/` folder to automatically load and index the harvard metadata dateset into ES. *Note: must run in `load_and_index/` folder to grab file, did not add absolute path search.*  
         `cd load_and_index`      
-        `python create_index.py`    
-or  
-        `python load_and_index/create_index.py`  
+        `python create_index.py`     
 
 3. Run local flask app   
 App is located in the `elasticsearch/` folder. Run the following commands then go to `http://localhost:8000/` to view the API.  
         `cd elasticsearch`       
-        `python app.py`      
-or  
-        `python elasticsearch/app.py`     
+        `python app.py`          
 
 
 

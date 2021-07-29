@@ -41,7 +41,7 @@ def index():
                 hit_obj = res['hits']['hits'][0]["_source"]
                 data_json=json.dumps(hit_obj, separators=(',', ':'), indent=4)
             
-            return render_template(template, fields=fields, response=data_json)
+            return render_template(template, fields=fields, response=data_json, queryID=queryID)
         except:
             return render_template("single_hit.html", fields=fields, response="ERROR")
 
@@ -104,7 +104,8 @@ def index():
             doc_ct=bucket['doc_count']
             print(key,doc_ct)
             facet_dict[key]=doc_ct
-        return render_template("facet.html", fields=fields, facet_dict=facet_dict)
+        data_json=json.dumps(facet_dict, separators=(',', ':'), indent=4)
+        return render_template("facet.html", fields=fields, facet_dict=facet_dict, json=data_json)
 
     
     return render_template("index.html", fields=fields)

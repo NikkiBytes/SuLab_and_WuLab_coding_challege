@@ -1,8 +1,13 @@
 {% extends 'index.html' %}
     {% block content %}
-        {% for x in response %}
-            
-            {{  }}
-            <hr>
+        <h3>Facet results for funder.name</h3>
+        
+        {% for name, ct in facet_dict.items() %}
+            <b>Funder Name:</b> {{ name }}, <b>doc_count:</b> {{ ct }}
+            <br>
         {% endfor %}
+        <hr>
+        <br>
+            <b>json_format:</b> {{ json }}
+        
 {% endblock %}

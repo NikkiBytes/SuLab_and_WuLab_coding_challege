@@ -22,25 +22,25 @@ This assumes you have the Elasticsearch server installed and the Python Flask an
 1. Start elasticsearch server  
 In your terminal change directory to where you have downloaded the elasticsearch server and start the server.  
 For windows:  
-       cd C:\elasticsearch-7.13.4\elasticsearch-7.13.4      
-       .\bin\elasticsearch.bat     
+       `cd C:\elasticsearch-7.13.4\elasticsearch-7.13.4`       
+       `.\bin\elasticsearch.bat`       
 On mac:  
-        cd /apps/elasticsearch/elasticsearch-2.3.1
-        elasticsearch
+        `cd /apps/elasticsearch/elasticsearch-2.3.1`    
+        `elasticsearch`  
 
 2. Load and index the data into Elasticsearch  
 Run the script `create_index.py` in the `load_and_index/` folder to automatically load and index the harvard metadata dateset into ES.   
-        cd load_and_index  
-        python create_index.py  
+        `cd load_and_index`      
+        `python create_index.py`    
 or  
-        python load_and_index/create_index.py
+        `python load_and_index/create_index.py`  
 
 3. Run local flask app   
 App is located in the `elasticsearch/` folder. Run the following commands then go to `http://localhost:8000/` to view the API.  
-        cd elasticsearch      
-        python app.py    
+        `cd elasticsearch`       
+        `python app.py`      
 or  
-        python elasticsearch/app.py    
+        `python elasticsearch/app.py`     
 
 
 

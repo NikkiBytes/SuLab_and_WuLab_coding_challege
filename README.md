@@ -13,7 +13,7 @@ This assumes you have the Elasticsearch server installed and the Python Flask an
 
 > Install Elasticsearch Python Package [docs](https://elasticsearch-py.readthedocs.io/en/v7.13.4/)  
 
-`> pip install elasticsearch`
+`> python -m pip install elasticsearch`
 
 
 

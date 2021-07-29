@@ -16,4 +16,4 @@ The rest of fields should still be indexed and searchable as the default behavio
 
 Notes/Assumptions:
 * for the output I removed the elasticsearch tags, such as the "_shards", "hits", etc. fields.
-
+* currently using the "match_phrase" for the query for keywords, therefore results with exact phrases and word proximity provided 

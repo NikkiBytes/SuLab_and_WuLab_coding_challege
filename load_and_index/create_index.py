@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
-import json
+import json, os
 import warnings
-warnings.filterwarnings("ignore", category=ElasticsearchWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Elastic search configuation
 es = Elasticsearch(HOST="http://localhost", PORT=9200)
@@ -11,14 +11,14 @@ file='harvard_dataverse.json'
 
 with open(file, 'r', encoding='utf-8') as f:
     data=json.loads(f.read())
-    
+
 for obj in data:
     #print("-----")
     obj_id=obj["@id"]
-    es.index(index="harvardmetadata-test", doc_type="metadata", id=obj_id, body=obj,request_timeout=10000)
-    
+    es.index(index="harvardmetadata", doc_type="metadata", id=obj_id, body=obj,request_timeout=10000)
+
 es.indices.put_mapping(
-    index="harvardmetadata-test",
+    index="harvardmetadata",
     doc_type="metadata",
     include_type_name=True,
     body=
@@ -90,7 +90,7 @@ es.indices.put_mapping(
        'fields': {'keyword': {'type': 'keyword', 'ignore_above': 256}}}}},
     'version': {'type': 'text',
      'fields': {'keyword': {'type': 'keyword', 'ignore_above': 256}}}}}
-    
+
 )
 
 

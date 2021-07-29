@@ -1,9 +1,0 @@
-{% extends 'index.html' %}
-    {% block content %}
-    <h3>Query results for field: {{ queryField }} and keywords: {{ queryKeyword}} </h3> 
-        {% for x in response %}
-            
-            {{ x }}
-            <hr>
-        {% endfor %}
-{% endblock %}

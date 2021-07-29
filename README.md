@@ -1,7 +1,7 @@
 # Simple Elasticsearch API  
 
 ## Instructions  
-This assumes you have Python 3, have the Elasticsearch server installed and the Python Flask and Elasticsearch packages installed. Installation instructions are listed below.
+This assumes you have Python 3, have the Elasticsearch 7 server installed and the Python Flask and Elasticsearch packages installed. Installation instructions are listed below.
 
 ### Installation:  
 > Install [Elasticsearch server](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)     

@@ -21,8 +21,8 @@ This assumes you have the Elasticsearch server installed and the Python Flask an
 
 1. Start elasticsearch server  
 In your terminal change directory to where you have downloaded the elasticsearch server and start the server.  
-      > cd C:\elasticsearch-7.13.4\elasticsearch-7.13.4  
-      > .\bin\elasticsearch.bat   
+       `cd C:\elasticsearch-7.13.4\elasticsearch-7.13.4`    
+       `.\bin\elasticsearch.bat`   
 
 2. Load and index the data into Elasticsearch  
 Run the script `create_index.py` in the `load_and_index/` folder to automatically load and index the harvard metadata dateset into ES.   
